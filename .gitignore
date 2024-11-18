@@ -3,3 +3,8 @@
 *.log
 .streamlit
 .devcontainer
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyc
