@@ -7,9 +7,6 @@ import streamlit as st
 import json
 
 from model.question import Question
-from dotenv import load_dotenv
-
-load_dotenv()
 
 MODEL = "gpt-4o"
 ASSISTANT_ID = "asst_70tIJEzRxP8K3wEvdhokwH9u"
@@ -209,7 +206,7 @@ def get_questions(topics: str, number_of_questions: int, number_of_answers: int,
         print("Questions: ", questions)
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
-        raise
+        raise e
 
     return questions
 
