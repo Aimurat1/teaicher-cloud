@@ -1,0 +1,4 @@
+openai
+mdpdf
+streamlit
+watchdog

@@ -1,0 +1,5 @@
+.env
+*.pdf
+*.log
+.streamlit
+.devcontainer
