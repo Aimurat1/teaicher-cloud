@@ -78,3 +78,10 @@ class App:
         self.current_page = self.pages[PageEnum.GENERATE_EXAM]
 
         st.rerun()
+        
+    def publish_to_google_forms(self, title: str, owner_email: str) -> str:
+        if not self._questions:
+            raise ValueError("No questions available to publish")
+            
+        from utils.google_forms import create_google_form
+        return create_google_form(title, self._questions, owner_email)

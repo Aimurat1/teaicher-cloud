@@ -8,3 +8,4 @@
 *.pyd
 __pycache__/
 *.pyc
+*.json

@@ -114,11 +114,38 @@ class GenerateExamPage(Page):
                     mime="application/pdf",
                     help="Download the questions with answers as a PDF file"
                 )
+                
+            with center:
+                publish_form = st.button("Publish to Google Forms", help="Create a Google Form with these questions")
+                
+                if "publishing_to_forms" not in st.session_state:
+                    st.session_state.publishing_to_forms = False
+                
+                if publish_form:
+                    st.session_state.publishing_to_forms = True
 
             with right:
                 if st.button("Start exam", help="Start the exam"):
                     app.change_page(PageEnum.QUESTIONS)
 
+            if st.session_state.publishing_to_forms:
+                st.write("_____________________________________________")
+                st.title("Publish to Google Forms")
+                form_title = st.text_input("Form Title", value=topics)
+                owner_email = st.text_input("Input owner email", value=st.secrets['GOOGLE_ACCOUNT_EMAIL'])
+                create_form = st.button("Create Form")
+                
+                if create_form:
+                    warning = st.warning("Generating Google Form. This may take a while...")
+                    try:
+                        form_url = app.publish_to_google_forms(form_title, owner_email)
+                        warning.empty()
+                        st.success(f"Form created successfully! [Open Form]({form_url})")
+                        
+                        st.session_state.publishing_to_forms = False
+                    except Exception as e:
+                        print(e)
+                        st.error(f"Failed to create Google Form: {str(e)}")
 
 class QuestionsPage(Page):
 

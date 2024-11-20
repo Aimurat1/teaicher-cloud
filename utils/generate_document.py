@@ -65,7 +65,8 @@ def markdown_to_pdf(markdown: str, output_file: str):
         "--paper", "A4"
     ])
 
-    os.remove(TEMP_MD_FILE)
+    if os.path.exists(TEMP_MD_FILE):
+        os.remove(TEMP_MD_FILE)
 
 
 def questions_to_pdf(questions: List[Question], output_file: str):
